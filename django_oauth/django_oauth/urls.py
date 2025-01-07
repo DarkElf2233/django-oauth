@@ -9,5 +9,5 @@ urlpatterns = [
     path('api/token/', ObtainTokenView.as_view()),
     path('api/token/revoke/', RevokeTokenView.as_view()),
 
-    # path('auth/', include('oauth2_provider.urls')),
+    path('auth/', include('oauth2_provider.urls')),
 ]
