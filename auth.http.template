@@ -1,0 +1,21 @@
+# Create new access token
+POST http://localhost:8000/api/token/
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=<your_client_id>&client_secret=<your_client_secret>&username=<username>&password=<password>
+
+###
+
+# Revoke an existing access token
+POST http://localhost:8000/api/token/revoke/
+Content-Type: application/json
+
+{
+    "user_id": "<user_id>"
+}
+
+###
+
+# Access api with access token
+GET http://localhost:8000/api/books/
+Authorization: Bearer <your_access_token>
