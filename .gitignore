@@ -1,5 +1,15 @@
+# Backend
 .venv/
 .env
 __pycache__/
-.vscode/
 auth.http
+
+# Frontend
+node_modules/
+build/
+
+# Proxy
+conf
+
+# Other
+.vscode/
