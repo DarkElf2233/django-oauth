@@ -9,6 +9,7 @@ grant_type=password&client_id=<your_client_id>&client_secret=<your_client_secret
 # Revoke an existing access token
 POST http://localhost:8000/api/token/revoke/
 Content-Type: application/json
+Authorization: Bearer <your_access_token>
 
 {
     "user_id": "<user_id>"
@@ -18,4 +19,24 @@ Content-Type: application/json
 
 # Access api with access token
 GET http://localhost:8000/api/books/
+Authorization: Bearer <your_access_token>
+
+###
+
+# Create a new user (without access token)
+POST  http://localhost:8000/api/register/
+Content-Type: application/json
+
+{
+    "username": "<username>",
+    "password": "<password>",
+    "first_name": "<first_name>",
+    "last_name": "<last_name>",
+    "email": "<email>"
+}
+
+###
+
+# Get all the users (with access token, admins only)
+GET  http://localhost:8000/api/users/
 Authorization: Bearer <your_access_token>

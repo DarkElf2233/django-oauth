@@ -1,14 +1,15 @@
 from pathlib import Path
-from dotenv import load_dotenv
-import os
+import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
+env = environ.Env()
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+environ.Env.read_env(f'{BASE_DIR}/../.env')
 
-DEBUG = False
+SECRET_KEY = env('SECRET_KEY')
+
+DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -34,6 +35,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAdminUser',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
@@ -90,11 +93,11 @@ WSGI_APPLICATION = 'django_oauth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASS"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT")
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASS"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT")
     }
 }
 
@@ -128,6 +131,8 @@ CORS_ALLOWED_ORIGINS = [
 
 LOGIN_URL = '/adfsdhehtyxqzczq/login/'
 
+AUTH_USER_MODEL = 'myapp.User'
+
 # Internationalization
 
 LANGUAGE_CODE = 'en-us'
@@ -140,10 +145,9 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
+STATIC_URL = env('STATIC_URL')
 
-STATIC_URL = os.getenv('STATIC_URL')
-
-STATIC_ROOT = os.getenv('STATIC_ROOT')
+STATIC_ROOT = env('STATIC_ROOT')
 
 # Default primary key field type
 
