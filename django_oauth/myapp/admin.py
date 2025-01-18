@@ -9,5 +9,5 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'first_name', 'last_name', 'created', 'is_staff']
-    exclude = ['password', 'groups', 'last_login', 'user_permissions', 'date_joined']
+    list_display = ['email', 'created', 'is_staff']
+    exclude = ['username', 'first_name', 'last_name', 'password', 'groups', 'last_login', 'user_permissions', 'date_joined']

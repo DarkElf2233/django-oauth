@@ -86,13 +86,12 @@ class UserDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
 class ObtainTokenView(TokenView):
     def post(self, request, *args, **kwargs):
-        username = request.POST.get('username')
+        email = request.POST.get('email')
 
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=email)
         except User.DoesNotExist:
             return JsonResponse({
                 "error": "invalid_user",
@@ -115,6 +114,9 @@ class ObtainTokenView(TokenView):
                 "token_type": "Bearer",
                 "scope": active_token.scope,
             })
+
+        request.POST = request.POST.copy()
+        request.POST['username'] = user.email
 
         return super().post(request, *args, **kwargs)
 

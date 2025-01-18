@@ -44,7 +44,8 @@ REST_FRAMEWORK = {
 }
 
 OAUTH2_PROVIDER = {
-    'ACCESS_TOKEN_EXPIRE_SECONDS': 3600 * 24,  # 1 day in seconds
+    'ACCESS_TOKEN_EXPIRE_SECONDS': 5, # 3600 * 24,  # 1 day in seconds
+    'REFRESH_TOKEN_EXPIRE_SECONDS': 3600 * 24 * 2,  # 2 days in seconds
     'ALLOWED_GRANT_TYPES': [
         'password',
         'refresh_token',
@@ -137,7 +138,7 @@ AUTH_USER_MODEL = 'myapp.User'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
